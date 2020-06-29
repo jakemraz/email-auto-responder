@@ -12,7 +12,7 @@ ses = boto3.client('ses')
 payload_example = {
   "Source": "Jake <jakemraz100@gmail.com>",
   "Template": "test1", # TemplateName at SES
-  "TemplateData": "{ \"name\":\"Alejandro\", \"favoriteanimal\": \"alligator\" }",
+  "TemplateData": "{'name':'Alejandro','favoriteanimal':'alligator'}",
   "Destination": ["jakemraz100@gmail.com"]
 }
 
@@ -22,7 +22,7 @@ def handler(event, context):
       Source= event["Source"],
       Template= event["Template"],
       ConfigurationSetName= "TestConfigSet",
-      TemplateData= event["TemplateData"],
+      TemplateData= json.dumps(event["TemplateData"]),
       Destination= {
         "ToAddresses": event["Destination"]
       }
