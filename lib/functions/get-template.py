@@ -14,7 +14,7 @@ def handler(event, context):
   try:
 
     template_name = event['TemplateName']
-    response = ses.delete_template(TemplateName = template_name)
+    response = ses.get_template(TemplateName = template_name)
   except Exception as e:
     return {
       'statusCode': 500,

@@ -71,6 +71,26 @@ export class EmailAutoResponderStack extends cdk.Stack {
       }
     });
 
+    new lambda.Function(this, `DeleteTemplateFunction-${AppConfig.DEPLOYMENT}`, {
+      functionName: `DeleteTemplateFunction-${AppConfig.DEPLOYMENT}`,
+      runtime: lambda.Runtime.PYTHON_3_7,
+      code: lambda.Code.fromAsset(path.resolve(__dirname, './functions')),
+      description: `DeleteTemplateFunction-${AppConfig.DEPLOYMENT}`,
+      handler: 'delete-template.handler',
+      role,
+      timeout: cdk.Duration.seconds(30),
+    });
+
+    new lambda.Function(this, `GetTemplateFunction-${AppConfig.DEPLOYMENT}`, {
+      functionName: `GetTemplateFunction-${AppConfig.DEPLOYMENT}`,
+      runtime: lambda.Runtime.PYTHON_3_7,
+      code: lambda.Code.fromAsset(path.resolve(__dirname, './functions')),
+      description: `GetTemplateFunction-${AppConfig.DEPLOYMENT}`,
+      handler: 'get-template.handler',
+      role,
+      timeout: cdk.Duration.seconds(30),
+    });
+
     const requestFn = new lambda.Function(this, `PollTemplateMailFunction-${AppConfig.DEPLOYMENT}`, {
       runtime: lambda.Runtime.PYTHON_3_7,
       functionName: `PollTemplateMailFunction-${AppConfig.DEPLOYMENT}`,
