@@ -23,9 +23,8 @@ QUEUE_URL = os.environ['QUEUE_URL']
 # event called by sqs
 
 def handler(event, context):
-  try:
-
-    for record in event['Records']:
+  for record in event['Records']:
+    try:
       logger.info(record)
       msg_attr = record['messageAttributes']
       source = msg_attr['Source']['stringValue']
@@ -47,8 +46,6 @@ def handler(event, context):
           email = item['Address']
           break
 
-      print(email)
-
       response = ses.send_templated_email(
         Source= source,
         Template= template,
@@ -58,19 +55,21 @@ def handler(event, context):
           "ToAddresses": [email]
         }
       )
+      print('sent')
       print(response)
-  except ClientError as e:
-    return {
-      'statusCode': 500,
-      'body': json.dumps(e.response)
-    }
-  else:
-    logger.info("Email sent! Message ID:"),
-    logger.info(response['MessageId'])
-    sqs.delete_message(
-        QueueUrl=QUEUE_URL,
-        ReceiptHandle=record['receiptHandle'],
-    )
+    except Exception as e:
+      print(e)
+      return {
+        'statusCode': 500,
+        'body': json.dumps(e)
+      }
+    else:
+      logger.info("Email sent! Message ID:"),
+      logger.info(response['MessageId'])
+      sqs.delete_message(
+          QueueUrl=QUEUE_URL,
+          ReceiptHandle=record['receiptHandle'],
+      )
     
   return {
       'statusCode': 200,
