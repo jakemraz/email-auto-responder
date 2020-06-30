@@ -4,7 +4,7 @@ import json
 import logging
 from botocore.exceptions import ClientError
 
-logger = logging.getLogger('mail-request')
+logger = logging.getLogger('create-template')
 logger.setLevel(logging.INFO)
 
 ses = boto3.client('ses')
