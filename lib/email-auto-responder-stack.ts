@@ -33,6 +33,7 @@ export class EmailAutoResponderStack extends cdk.Stack {
 
     new lambda.Function(this, `RequestTemplateMailFunction`, {
       runtime: lambda.Runtime.PYTHON_3_7,
+      functionName: 'RequestTemplateMailFunction',
       code: lambda.Code.fromAsset(path.resolve(__dirname, './functions')),
       description: `RequestTemplateMailFunction`,
       handler: 'request-template-mail.handler',
