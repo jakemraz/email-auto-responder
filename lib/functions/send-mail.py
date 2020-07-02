@@ -56,8 +56,8 @@ def handler(event, context):
 
 
 payload = {
-  'sender': "Jakemraz <jakemraz100@gmail.com>",
-  'email': 'jakemraz100@gmail.com',
-  'foo': 'hi',
-  'bar': 'bye'
+  "sender": "Jakemraz <jakemraz100@gmail.com>",
+  "email": "jakemraz100@gmail.com",
+  "foo": "hi",
+  "bar": "bye"
 }
