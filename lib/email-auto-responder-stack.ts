@@ -55,6 +55,15 @@ export class EmailAutoResponderStack extends cdk.Stack {
         QUEUE_URL: mailQueue.queueUrl
       }
     });
+
+    new lambda.Function(this, `SendMailFunction-${AppConfig.DEPLOYMENT}`, {
+      functionName: `SendMailFunction-${AppConfig.DEPLOYMENT}`,
+      runtime: lambda.Runtime.PYTHON_3_7,
+      code: lambda.Code.fromAsset(path.resolve(__dirname, './functions')),
+      description: `SendMailFunction`,
+      handler: 'send-mail.handler',
+      role
+    });
     
     
     new lambda.Function(this, `CreateTemplateFunction-${AppConfig.DEPLOYMENT}`, {
