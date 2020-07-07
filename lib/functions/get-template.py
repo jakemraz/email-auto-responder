@@ -23,11 +23,11 @@ def handler(event, context):
     
   return {
       'statusCode': 200,
-      'body': json.dumps(response)
+      'body': json.dumps(response, ensure_ascii=False)
   }
 
 sample_payload = {
   "TemplateName": "test2"
 }
 
-#handler(payload, None)
+handler(sample_payload, None)
