@@ -4,7 +4,7 @@ import json
 import logging
 from botocore.exceptions import ClientError
 
-logger = logging.getLogger('delete-template')
+logger = logging.getLogger('get-template')
 logger.setLevel(logging.INFO)
 
 ses = boto3.client('ses')
