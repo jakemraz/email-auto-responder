@@ -12,14 +12,7 @@ sqs = boto3.client('sqs')
 QUEUE_URL = os.environ['QUEUE_URL']
 
 
-payload_example = {
-  "Source": "Jake <jakemraz100@gmail.com>",
-  "Template": "test1", # TemplateName at SES
-  "TemplateData": "{\"name\":\"Alejandro\",\"favoriteanimal\":\"alligator\"}",
-  #"Destination": "jakemraz100@gmail.com",
-  "TargetUserId": '25667',
-  "PinpointApplicationId": "blahblah"
-}
+
 
 def handler(event, context):
 
@@ -58,3 +51,15 @@ def handler(event, context):
       'statusCode': 200,
       'body': json.dumps(response)
   }
+
+
+sample_payload = {
+  "Source": "Jake <jakemraz100@gmail.com>",
+  "Template": "test1", # TemplateName at SES
+  "TemplateData": "{\"name\":\"Alejandro\",\"favoriteanimal\":\"alligator\"}",
+  #"Destination": "jakemraz100@gmail.com",
+  "TargetUserId": '25667',
+  "PinpointApplicationId": "blahblah"
+}
+
+# handler(sample_payload, None)

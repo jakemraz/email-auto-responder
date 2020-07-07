@@ -30,4 +30,4 @@ sample_payload = {
   "TemplateName": "test2"
 }
 
-handler(sample_payload, None)
+#handler(sample_payload, None)

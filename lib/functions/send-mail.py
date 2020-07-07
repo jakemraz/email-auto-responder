@@ -55,9 +55,11 @@ def handler(event, context):
 
 
 
-payload = {
+sample_payload = {
   "sender": "Jakemraz <jakemraz100@gmail.com>",
   "email": "jakemraz100@gmail.com",
   "foo": "hi",
   "bar": "bye"
 }
+
+# handler(sample_payload, None)
